@@ -7,9 +7,7 @@
 
 #import "EVStorageManager.h"
 #import "EVStorageProtocol.h"
-#import "EVSQLiteStorage.h"
-#import "EVCoreDataStorage.h"
-#import "EVRealmStorage.h"
+#import "EVSQLiteStorage.h" // 固定使用 SQLite
 
 @interface EVStorageManager ()
 @property (nonatomic, strong) id<EVStorageProtocol> storage;
@@ -34,19 +32,13 @@
 
 - (instancetype)initPrivate {
     if (self = [super init]) {
-        // 内部策略选择数据库
-        if ([self canUseCoreData]) {
-            _storage = [[EVCoreDataStorage alloc] init];
-        } else if ([self canUseRealm]) {
-            _storage = [[EVRealmStorage alloc] init];
-        } else {
-            _storage = [[EVSQLiteStorage alloc] init];
-        }
+        // ✅ 纯组合：固定使用 SQLite
+        _storage = [[EVSQLiteStorage alloc] init];
     }
     return self;
 }
 
-#pragma mark - Public Facade（对外 API）
+#pragma mark - Public Facade
 - (void)saveObject:(id)object forKey:(NSString *)key {
     [self.storage saveObject:object forKey:key];
 }
@@ -59,21 +51,9 @@
     [self.storage deleteObjectForKey:key];
 }
 
-/// 调试显示当前后端类型
 - (NSString *)currentStorageType {
     return [self.storage storageType];
 }
 
-#pragma mark - 内部策略判定
-- (BOOL)canUseCoreData {
-    if (@available(iOS 13.0, *)) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)canUseRealm {
-    return (NSClassFromString(@"RLMRealm") != nil);
-}
-
 @end
+
