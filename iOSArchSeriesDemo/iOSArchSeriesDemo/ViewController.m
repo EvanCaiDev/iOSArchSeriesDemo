@@ -26,7 +26,8 @@
 
 - (void)setupChapters {
     self.chapters = @[
-        [[EVChapter alloc] initWithTitle:@"设计模式" demoClassName:@"EVDesignPatternsViewController"]
+        [[EVChapter alloc] initWithTitle:@"设计模式" demoClassName:@"EVDesignPatternsViewController"],
+        [[EVChapter alloc] initWithTitle:@"MVVM" demoClassName:@"EVUserListViewController"]
     ];
 }
 
