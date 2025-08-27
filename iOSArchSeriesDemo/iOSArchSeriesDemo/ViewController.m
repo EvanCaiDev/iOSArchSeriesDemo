@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "EVChapter.h"
+#import "EVVIPERUserListRouter.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,7 +28,8 @@
 - (void)setupChapters {
     self.chapters = @[
         [[EVChapter alloc] initWithTitle:@"设计模式" demoClassName:@"EVDesignPatternsViewController"],
-        [[EVChapter alloc] initWithTitle:@"MVVM" demoClassName:@"EVUserListViewController"]
+        [[EVChapter alloc] initWithTitle:@"MVVM" demoClassName:@"EVUserListViewController"],
+        [[EVChapter alloc] initWithTitle:@"VIPER" demoClassName:@"EVVIPERUserListViewController"]
     ];
 }
 
@@ -57,10 +59,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EVChapter *chapter = self.chapters[indexPath.row];
-    Class demoClass = NSClassFromString(chapter.demoClassName);
-    if (demoClass) {
-        UIViewController *demoVC = [[demoClass alloc] init];
+    UIViewController *demoVC = nil;
+
+    if ([chapter.demoClassName isEqualToString:@"EVVIPERUserListViewController"]) {
+        // VIPER 模块必须通过 Router 创建
+        demoVC = [EVVIPERUserListRouter createModule];
         demoVC.title = chapter.title;
+    } else {
+        // 普通 Demo，直接初始化
+        Class demoClass = NSClassFromString(chapter.demoClassName);
+        if (demoClass) {
+            demoVC = [[demoClass alloc] init];
+            demoVC.title = chapter.title;
+        }
+    }
+
+    if (demoVC) {
         [self.navigationController pushViewController:demoVC animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
