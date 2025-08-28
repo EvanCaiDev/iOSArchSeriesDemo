@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EVUserService : NSObject
 
-- (void)fetchUsers:(void(^)(NSArray<EVUser *> *users))completion;
+- (void)fetchUsers:(void(^)(NSArray<EVUser *> * _Nullable users, NSError * _Nullable error))completion;
 
 @end
 

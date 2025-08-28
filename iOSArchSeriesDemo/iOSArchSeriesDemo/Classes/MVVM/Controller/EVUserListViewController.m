@@ -19,17 +19,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"用户列表";
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    _viewModel = [EVUserListViewModel new]; // 内部初始化
+
+    _viewModel = [EVUserListViewModel new];
     [self setupTableView];
-    
+
     __weak typeof(self) weakSelf = self;
     [self.viewModel loadUsers:^{
-        [weakSelf.tableView reloadData];
+        [weakSelf updateUI];
     }];
+}
+
+- (void)updateUI {
+    switch (self.viewModel.state) {
+        case EVLoadingStateLoading:
+            NSLog(@"正在加载中...");
+            break;
+        case EVLoadingStateSuccess:
+            [self.tableView reloadData];
+            break;
+        case EVLoadingStateFailure:
+            NSLog(@"加载失败: %@", self.viewModel.errorMessage);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - UI
