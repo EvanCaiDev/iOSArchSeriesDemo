@@ -28,6 +28,11 @@
     }];
 }
 
+- (void)didSelectUser:(EVVIPERUserDisplayItem *)item {
+    UIViewController *sourceVC = (UIViewController *)self.view;
+    [self.router navigateToUserDetailFrom:sourceVC userItem:item];
+}
+
 - (void)dealloc {
     NSLog(@"%s",__func__);
 }

@@ -7,11 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class EVVIPERUserDisplayItem;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol EVVIPERUserListPresenterProtocol <NSObject>
 
 - (void)loadUsers;
+
+- (void)didSelectUser:(EVVIPERUserDisplayItem *)item;
 
 @end
 

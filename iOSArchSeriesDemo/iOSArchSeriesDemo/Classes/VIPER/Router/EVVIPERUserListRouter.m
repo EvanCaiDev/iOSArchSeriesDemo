@@ -9,6 +9,7 @@
 #import "EVVIPERUserListViewController.h"
 #import "EVVIPERUserListPresenter.h"
 #import "EVVIPERUserListInteractor.h"
+#import "EVVIPERUserDisplayItem.h"
 
 @implementation EVVIPERUserListRouter
 
@@ -24,6 +25,14 @@
     presenter.router = router;
     
     return view;
+}
+
+- (void)navigateToUserDetailFrom:(UIViewController *)from userItem:(EVVIPERUserDisplayItem *)item {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"用户详情"
+                                                                   message:[NSString stringWithFormat:@"%@ (%@)", item.name, item.genderString]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [from presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)dealloc {

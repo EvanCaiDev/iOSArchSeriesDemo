@@ -46,6 +46,12 @@
     return cell;
 }
 
+// ViewController 只通知 Presenter
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    EVVIPERUserDisplayItem *item = _items[indexPath.row];
+    [self.presenter didSelectUser:item];
+}
+
 - (void)dealloc {
     NSLog(@"%s",__func__);
 }
