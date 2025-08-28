@@ -6,7 +6,7 @@
 //
 
 #import "EVUserTableViewCell.h"
-#import "EVUserDisplayItem.h"
+#import "EVUserViewData.h"
 
 @interface EVUserTableViewCell ()
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -40,7 +40,7 @@
     return self;
 }
 
-- (void)configureWithItem:(EVUserDisplayItem *)item {
+- (void)configureWithItem:(EVUserViewData *)item {
     self.nameLabel.text = item.displayName;
     self.ageLabel.text = item.displayAge;
     self.genderLabel.text = item.displayGender;

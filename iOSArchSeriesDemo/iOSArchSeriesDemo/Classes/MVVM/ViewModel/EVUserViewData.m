@@ -5,8 +5,8 @@
 //  Created by caiwanhong on 2025/8/26.
 //
 
-#import "EVUserDisplayItem.h"
+#import "EVUserViewData.h"
 
-@implementation EVUserDisplayItem
+@implementation EVUserViewData
 
 @end

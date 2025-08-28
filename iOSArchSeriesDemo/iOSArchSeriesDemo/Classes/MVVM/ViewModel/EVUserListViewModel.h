@@ -7,13 +7,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class EVUserDisplayItem;
+@class EVUserViewData;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EVUserListViewModel : NSObject
 
-@property (nonatomic, strong, readonly) NSArray<EVUserDisplayItem *> *displayItems;
+@property (nonatomic, strong, readonly) NSArray<EVUserViewData *> *displayItems;
 
 - (void)loadUsers:(void(^)(void))completion;
 

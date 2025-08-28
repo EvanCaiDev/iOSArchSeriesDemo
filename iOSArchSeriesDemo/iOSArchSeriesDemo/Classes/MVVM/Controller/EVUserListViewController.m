@@ -8,7 +8,7 @@
 #import "EVUserListViewController.h"
 #import "EVUserListViewModel.h"
 #import "EVUserTableViewCell.h"
-#import "EVUserDisplayItem.h"
+#import "EVUserViewData.h"
 
 @interface EVUserListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -48,14 +48,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EVUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    EVUserDisplayItem *item = self.viewModel.displayItems[indexPath.row];
+    EVUserViewData *item = self.viewModel.displayItems[indexPath.row];
     [cell configureWithItem:item];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EVUserDisplayItem *item = self.viewModel.displayItems[indexPath.row];
+    EVUserViewData *item = self.viewModel.displayItems[indexPath.row];
     NSLog(@"点击了用户 %@，userId = %@", item.displayName, item.userId);
 }
 

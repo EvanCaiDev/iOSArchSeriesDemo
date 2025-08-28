@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class EVUserDisplayItem;
+@class EVUserViewData;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EVUserTableViewCell : UITableViewCell
 
-- (void)configureWithItem:(EVUserDisplayItem *)item;
+- (void)configureWithItem:(EVUserViewData *)item;
 
 @end
 
